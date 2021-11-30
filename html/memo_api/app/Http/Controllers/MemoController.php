@@ -50,11 +50,16 @@ class MemoController extends Controller
     {
 
         //バリデーションで問題が無ければ保存
-        Memo::create($request->all());
+        $memo = Memo::create($request->all());
         return response()->json([
             'success' => true,
             'message' => 'Insert success!',
-            'details' => $request->all()
+            'details' => [
+                'id' => $memo->id,
+                'title' => $memo->title,
+                'content' => $memo->content,
+
+            ],
         ]);
     }
 
